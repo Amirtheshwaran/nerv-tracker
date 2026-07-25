@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NERV // NEAR-EARTH ENCOUNTER SYSTEM</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <canvas id="scene"></canvas>
+    <div id="labels"></div>
+
+    <div id="hud">
+      <!-- top bar -->
+      <header id="topbar">
+        <div class="brand">
+          <span class="nerv-mark">NERV</span>
+          <span class="brand-sub">特務機関<br />TOKUMU KIKAN</span>
+        </div>
+        <div class="title-block">
+          <div class="title">NEAR-EARTH ENCOUNTER SYSTEM</div>
+          <div class="subtitle">近地球遭遇監視システム // TERMINAL 03</div>
+        </div>
+        <div class="clock-block">
+          <div class="clock-row"><span class="lbl">UTC</span><span id="clock-utc">--:--:--</span></div>
+          <div class="clock-row"><span class="lbl">SIM</span><span id="clock-sim">--:--:--</span></div>
+          <div id="warp-controls">
+            <button data-warp="0">II</button>
+            <button data-warp="1" class="on">1x</button>
+            <button data-warp="60">60x</button>
+            <button data-warp="600">600x</button>
+            <button data-warp="3600">1H/s</button>
+            <button data-warp="86400">1D/s</button>
+          </div>
+        </div>
+      </header>
+
+      <!-- alert banner -->
+      <div id="alert-banner" class="hidden">
+        <span class="alert-jp">警告</span>
+        <span id="alert-text">PATTERN ORANGE : POTENTIALLY HAZARDOUS OBJECT IN APPROACH WINDOW</span>
+        <span class="alert-jp">警告</span>
+      </div>
+
+      <!-- left: threat board -->
+      <aside id="threat-panel" class="panel">
+        <div class="panel-head">
+          <span>THREAT BOARD</span><span class="panel-head-jp">接近天体</span>
+        </div>
+        <div class="panel-note">CLOSE APPROACHES // 7 DAY WINDOW // CNEOS</div>
+        <ul id="threat-list">
+          <li class="loading-row">ACQUIRING JPL FEED...</li>
+        </ul>
+      </aside>
+
+      <!-- right: target readout -->
+      <aside id="target-panel" class="panel">
+        <div class="panel-head">
+          <span>TARGET</span><span class="panel-head-jp">目標</span>
+        </div>
+        <div id="target-name">EARTH</div>
+        <div id="target-class">THIRD PLANET // HOMEWORLD</div>
+        <table id="target-data"></table>
+        <div class="quick-row">
+          <button class="quick" data-focus="earth">EARTH</button>
+          <button class="quick" data-focus="iss">ISS</button>
+          <button class="quick" data-focus="moon">MOON</button>
+          <button class="quick" data-focus="sun">SOL</button>
+        </div>
+        <div class="panel-note dim">CLICK ANY OBJECT TO TRACK // ESC RETURNS TO EARTH</div>
+      </aside>
+
+      <!-- bottom left: MAGI -->
+      <div id="magi" class="panel">
+        <div class="panel-head"><span>MAGI SYS</span><span class="panel-head-jp">三賢人</span></div>
+        <div class="magi-row" id="magi-jpl">
+          <span class="magi-dot"></span><span class="magi-name">MELCHIOR·1</span>
+          <span class="magi-src">CNEOS NEO FEED</span><span class="magi-state">STANDBY</span>
+        </div>
+        <div class="magi-row" id="magi-neows">
+          <span class="magi-dot"></span><span class="magi-name">BALTHASAR·2</span>
+          <span class="magi-src">CNEOS ORBIT DATA</span><span class="magi-state">STANDBY</span>
+        </div>
+        <div class="magi-row" id="magi-celestrak">
+          <span class="magi-dot"></span><span class="magi-name">CASPER·3</span>
+          <span class="magi-src">CELESTRAK GP</span><span class="magi-state">STANDBY</span>
+        </div>
+      </div>
+
+      <!-- bottom right: census -->
+      <div id="census" class="panel">
+        <div class="panel-head"><span>ORBITAL CENSUS</span><span class="panel-head-jp">軌道上</span></div>
+        <div class="census-grid">
+          <div><i class="sw sw-star"></i>STARLINK <b id="n-starlink">0</b></div>
+          <div><i class="sw sw-ow"></i>ONEWEB <b id="n-oneweb">0</b></div>
+          <div><i class="sw sw-nav"></i>NAV/GNSS <b id="n-gnss">0</b></div>
+          <div><i class="sw sw-other"></i>OTHER <b id="n-other">0</b></div>
+          <div class="census-total">TRACKED OBJECTS <b id="n-total">0</b></div>
+          <div class="census-total">NEO / 7 DAYS <b id="n-neo">--</b> · HAZARDOUS <b id="n-haz" class="haz">--</b></div>
+        </div>
+      </div>
+
+      <!-- decorative overlays -->
+      <div id="scanlines"></div>
+      <div id="vignette"></div>
+      <div id="boot-screen">
+        <div class="boot-inner">
+          <div class="boot-nerv">NERV</div>
+          <div class="boot-line">NEAR-EARTH ENCOUNTER SYSTEM</div>
+          <div class="boot-line" id="boot-status">INITIALIZING MAGI...</div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

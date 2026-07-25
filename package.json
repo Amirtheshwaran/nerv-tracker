@@ -1,0 +1,25 @@
+{
+  "name": "nerv-tracker",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "deploy": "npm run build && gh-pages -d dist"
+  },
+  "devDependencies": {
+    "@types/three": "^0.185.1",
+    "@types/topojson-client": "^3.1.5",
+    "gh-pages": "^6.3.0",
+    "typescript": "~6.0.2",
+    "vite": "^8.1.1",
+    "world-atlas": "^2.0.2"
+  },
+  "dependencies": {
+    "satellite.js": "^7.1.0",
+    "three": "^0.185.1",
+    "topojson-client": "^3.1.0"
+  }
+}
